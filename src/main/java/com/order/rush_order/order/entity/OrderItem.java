@@ -1,5 +1,6 @@
-package com.order.rush_order.domain;
+package com.order.rush_order.order.entity;
 
+import com.order.rush_order.product.entity.Product;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,21 +8,23 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Payment {
+public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private PayMethod method;
+    private int quantity;
 
-    @Enumerated(EnumType.STRING)
+    // 주문 상품 가격
     @Column(nullable = false)
-    private PayStatus status;
-    // 결제일자 created_at
+    private float price;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private Orders order;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
 }

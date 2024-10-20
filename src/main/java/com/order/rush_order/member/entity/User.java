@@ -1,4 +1,4 @@
-package com.order.rush_order.domain;
+package com.order.rush_order.member.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,5 +27,11 @@ public class User {
     @Column(nullable = false)
     private String address;
 
-
+    public User(String email, String password, String name, String contact, String address) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.contact = contact;
+        this.address = address;
+    }
 }

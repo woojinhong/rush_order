@@ -1,5 +1,7 @@
-package com.order.rush_order.domain;
+package com.order.rush_order.wishlist.entity;
 
+import com.order.rush_order.product.entity.Product;
+import com.order.rush_order.wishlist.entity.Wishlist;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
