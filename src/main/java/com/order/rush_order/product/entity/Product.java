@@ -1,4 +1,4 @@
-package com.order.rush_order.domain;
+package com.order.rush_order.product.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

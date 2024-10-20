@@ -1,5 +1,6 @@
-package com.order.rush_order.domain;
+package com.order.rush_order.order.entity;
 
+import com.order.rush_order.member.entity.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
