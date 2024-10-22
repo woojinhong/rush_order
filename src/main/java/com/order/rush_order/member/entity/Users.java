@@ -1,6 +1,6 @@
 package com.order.rush_order.member.entity;
 
-import com.order.rush_order.member.dto.UserSignUpRequestDto;
+import com.order.rush_order.member.dto.UserSignUpDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,6 +28,8 @@ public class Users {
 
     @Column(nullable = false)
     private String address;
+    @Column(nullable = false)
+    private boolean enabled;  // 계정 활성화 여부
 
     @Builder
     public Users(String email, String password, String name, String contact, String address) {
@@ -39,7 +41,7 @@ public class Users {
     }
 
     // 정적 팩토리 메서드
-    public static Users toEntity(UserSignUpRequestDto dto, String encodedPassword) {
+    public static Users toEntity(UserSignUpDto dto, String encodedPassword) {
         return Users.builder()
                 .email(dto.getEmail())
                 .password(encodedPassword)
@@ -47,5 +49,9 @@ public class Users {
                 .contact(dto.getContact())
                 .address(dto.getAddress())
                 .build();
+    }
+    // 계정 활성화 메서드
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }
