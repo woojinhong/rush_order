@@ -1,6 +1,5 @@
-package com.order.rush_order.payment.entity;
+package com.order.rush_order.order.entity;
 
-import com.order.rush_order.order.entity.Orders;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -3,17 +3,30 @@ spring:
     active: local  # 기본 활성화 프로파일 설정 (local, docker, test 중 하나 선택)
 
 ---
-# 1. 로컬 개발 환경 - MySQL
 
+# 1. 로컬 개발 환경 - MySQL
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: rushorder82@gmail.com
+    password: jekq kvui acez exgs
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
+
   config:
     activate:
-      on-profile: local  # docker 프로파일 활성화 시 적용
+      on-profile: local  # local 프로파일 활성화 시 적용
+
   datasource:
     url: jdbc:mysql://db:3306/rushorder
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     hibernate:
       ddl-auto: update  # 컨테이너 환경에서도 자동 업데이트 사용
@@ -21,6 +34,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+
 logging:
   level:
     org.hibernate.SQL: DEBUG
@@ -33,7 +47,7 @@ jwt:
     expiration:
       access-token: 3600000  # 1시간 (밀리초 단위)
       refresh-token: 86400000 # 24시간 (밀리초 단위)
-  algorithm: HS256 # 사용할 JWT 서명 알고리즘 (예: HS256)
+  algorithm: HS256  # 사용할 JWT 서명 알고리즘 (예: HS256)
 
 ---
 

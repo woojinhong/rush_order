@@ -4,10 +4,7 @@ import com.order.rush_order.member.dto.UserSignUpRequestDto;
 import com.order.rush_order.member.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
@@ -19,13 +16,16 @@ public class UserController {
     // user sign up 성공
     @PostMapping("/signup")
     public ResponseEntity<?> signUp(@RequestBody UserSignUpRequestDto signUpDto) {
-        return userService.signUp(signUpDto);
+        userService.signUp(signUpDto);
+        return ResponseEntity.ok("회원가입 성공");
     }
 
-    // user login 성공
-//    @PostMapping("/login")
-//    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-//        return userService.login(loginDto);
-//    }
+    // 이메일 인증 엔드포인트
+    @GetMapping("/verify")
+    public ResponseEntity<String> verifyEmail(@RequestParam("token") String token) {
+        userService.verifyEmail(token);
+        return ResponseEntity.ok("이메일 인증이 완료되었습니다.");
+    }
+
 }
 
