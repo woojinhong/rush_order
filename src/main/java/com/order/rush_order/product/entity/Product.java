@@ -25,23 +25,13 @@ public class Product extends Timestamp {
     private float price;
 
     @Column(nullable = false)
-    private long stock;
+    private long stock = 0;
 
     @Builder
-    public Product(String name, String description, float price, long stock) {
+    public Product(String name, String description, float price) {
         this.name = name;
         this.description = description;
         this.price = price;
-        this.stock = stock;
-    }
-
-    public static Product toEntity(ProductRequestDto dto){
-        return new Product (
-                dto.getName(),
-                dto.getDescription(),
-                dto.getPrice(),
-                dto.getStock()
-                );
     }
 
     // 상품 수량 증가 메서드 (비즈니스 로직)
