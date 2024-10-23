@@ -2,10 +2,7 @@ package com.order.rush_order.member.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.time.LocalDateTime;
-import java.util.Optional;
 import java.util.UUID;
 
 @Entity
@@ -28,7 +25,7 @@ public class EmailVerificationToken {
         EmailVerificationToken token = new EmailVerificationToken();
         token.user = user;
         token.token = UUID.randomUUID().toString();
-        token.expiryDate = LocalDateTime.now().plusHours(24); // 유효기간 24시간
+        token.expiryDate = LocalDateTime.now().plusHours(1); // 유효기간 1시간
         return token;
     }
 }
