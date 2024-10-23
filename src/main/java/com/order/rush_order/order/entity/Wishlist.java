@@ -1,6 +1,6 @@
-package com.order.rush_order.wishlist.entity;
+package com.order.rush_order.order.entity;
 
-import com.order.rush_order.member.entity.User;
+import com.order.rush_order.member.entity.Users;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +15,7 @@ public class Wishlist {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
 
 
     //created at

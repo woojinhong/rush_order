@@ -1,6 +1,6 @@
 package com.order.rush_order.order.entity;
 
-import com.order.rush_order.member.entity.User;
+import com.order.rush_order.member.entity.Users;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +24,6 @@ public class Orders {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
     // created at
 }

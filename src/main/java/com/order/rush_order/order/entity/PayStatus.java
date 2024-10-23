@@ -1,4 +1,4 @@
-package com.order.rush_order.payment.entity;
+package com.order.rush_order.order.entity;
 
 public enum PayStatus {
     SUCCESS, // 결제 성공
