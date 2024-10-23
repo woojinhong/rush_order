@@ -2,14 +2,15 @@ package com.order.rush_order.member.service;
 
 import com.order.rush_order.common.jwt.JwtUtil;
 import com.order.rush_order.member.dto.UserLoginDto;
-import com.order.rush_order.member.dto.UserSignUpDto;
+
+import com.order.rush_order.member.dto.UserSignUpRequestDto;
 import com.order.rush_order.member.entity.EmailVerificationToken;
 import com.order.rush_order.member.entity.Users;
 import com.order.rush_order.member.repository.EmailVerificationTokenRepository;
 import com.order.rush_order.member.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,12 +23,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    private final JwtUtil jwtUtil;
     private final EmailService emailService;
     private final EmailVerificationTokenRepository tokenRepository;
 
     @Transactional
-    public void signUp(UserSignUpDto userSignUpDto) {
+    public void signUp(UserSignUpRequestDto userSignUpDto) {
 
         //dto -> entity
         
@@ -40,6 +40,7 @@ public class UserService {
         Users users = Users.toEntity(userSignUpDto, pwdEncode);
 
         userRepository.save(users);
+
         // 이메일 인증 토큰 생성 및 저장
         EmailVerificationToken token = EmailVerificationToken.generateToken(users);
         tokenRepository.save(token);
@@ -74,12 +75,6 @@ public class UserService {
         if(passwordEncoder.matches(password, user.getPassword())) {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다");
         }
-
-        // JWT 생성 추가
-        String token = jwtUtil.createToken(user.getEmail());
-        jwtUtil.addJwtToCookie(token, res);
-
-
     }
     @Transactional
     public void verifyEmail(String token) {
