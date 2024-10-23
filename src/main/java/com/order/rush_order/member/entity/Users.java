@@ -1,6 +1,6 @@
 package com.order.rush_order.member.entity;
 
-import com.order.rush_order.member.dto.UserSignUpDto;
+import com.order.rush_order.member.dto.UserSignUpRequestDto;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,7 +41,7 @@ public class Users {
     }
 
     // 정적 팩토리 메서드
-    public static Users toEntity(UserSignUpDto dto, String encodedPassword) {
+    public static Users toEntity(UserSignUpRequestDto dto, String encodedPassword) {
         return Users.builder()
                 .email(dto.getEmail())
                 .password(encodedPassword)
