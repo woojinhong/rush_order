@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @NoArgsConstructor
 @Getter
@@ -22,13 +24,13 @@ public class Product extends Timestamp {
 
     // 상품 판매가
     @Column(nullable = false)
-    private float price;
+    private BigDecimal price;
 
     @Column(nullable = false)
     private long stock = 0;
 
     @Builder
-    public Product(String name, String description, float price) {
+    public Product(String name, String description, BigDecimal price) {
         this.name = name;
         this.description = description;
         this.price = price;

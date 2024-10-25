@@ -42,9 +42,16 @@ public class ProductService {
     }
 
     // 상품 상세 조회
-    public ProductDetailResponseDto getProductById(Long productId) {
-        Product product = productRepository.findById(productId)
-                .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
+    public ProductDetailResponseDto getProduct(Long productId) {
+        Product product = getProductById(productId);
         return ProductMapper.toDetailDto(product);
     }
+
+
+    public Product getProductById(Long productId) {
+        return productRepository.findById(productId)
+                .orElseThrow(() -> new IllegalArgumentException("상품을 찾을 수 없습니다."));
+    }
+
+
 }

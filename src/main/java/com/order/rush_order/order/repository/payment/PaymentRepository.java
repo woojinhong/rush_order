@@ -1,4 +1,4 @@
-package com.order.rush_order.order.repository;
+package com.order.rush_order.order.repository.payment;
 
 
 import com.order.rush_order.order.entity.Payment;

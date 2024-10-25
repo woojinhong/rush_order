@@ -50,11 +50,7 @@ public class UserService {
         emailService.sendEmail(users.getEmail(), "이메일 인증", "다음 링크를 클릭하여 인증을 완료하세요: " + link);
     }
 
-    private void validateDuplicateEmail(String email) {
-        if (userRepository.existsByEmail(email)) {
-            throw new IllegalArgumentException("중복된 이메일이 존재합니다.");
-        }
-    }
+
 
 
     public void login(UserLoginDto loginDto, HttpServletResponse res) {
@@ -62,9 +58,7 @@ public class UserService {
         String password = loginDto.getPassword();
 
         // 사용자 확인
-        Users user = userRepository.findByEmail(email).orElseThrow(
-                () -> new IllegalArgumentException("등록된 사용자가 없습니다")
-        );
+        Users user = getUserByEmail(email);
 
         // 계정 활성화 여부 확인
         if (!user.isEnabled()) {
@@ -76,6 +70,9 @@ public class UserService {
             throw new IllegalArgumentException("비밀번호가 일치하지 않습니다");
         }
     }
+
+
+
     @Transactional
     public void verifyEmail(String token) {
         EmailVerificationToken verificationToken = tokenRepository.findByToken(token)
@@ -89,4 +86,17 @@ public class UserService {
         user.setEnabled(true); // 사용자 계정 활성화
         userRepository.save(user);
     }
+
+    public Users getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElseThrow(
+                () -> new IllegalArgumentException("등록된 사용자가 없습니다")
+        );
+    }
+
+    private void validateDuplicateEmail(String email) {
+        if (userRepository.existsByEmail(email)) {
+            throw new IllegalArgumentException("중복된 이메일이 존재합니다.");
+        }
+    }
+
 }
