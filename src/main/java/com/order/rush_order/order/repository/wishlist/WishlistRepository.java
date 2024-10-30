@@ -3,11 +3,9 @@ package com.order.rush_order.order.repository.wishlist;
 
 import com.order.rush_order.member.entity.Users;
 import com.order.rush_order.order.dto.response.WishlistItemDto;
-import com.order.rush_order.order.dto.WishlistResponseDto;
 import com.order.rush_order.order.entity.Wishlist;
 import com.order.rush_order.product.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -18,7 +16,7 @@ public interface WishlistRepository extends JpaRepository<Wishlist,Long> {
 
     boolean existsByUserAndProduct(Users user, Product product);
 
-    List<WishlistResponseDto> findAllByUser(Users user);
+
 
     Optional<Wishlist> findByUserIdAndProductId(long userId, long productId);
 

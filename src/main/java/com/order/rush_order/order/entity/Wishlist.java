@@ -1,6 +1,6 @@
 package com.order.rush_order.order.entity;
 
-import com.order.rush_order.common.entity.Timestamp;
+
 import com.order.rush_order.member.entity.Users;
 import com.order.rush_order.product.entity.Product;
 import jakarta.persistence.*;

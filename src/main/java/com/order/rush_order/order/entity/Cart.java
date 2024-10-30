@@ -62,6 +62,11 @@ public class Cart {
         this.cartPrice = calculateCartPrice();  // 수량 변경 시 가격 재계산
     }
 
+    // 상품 가격 변경 시 호출할 메서드
+    public void updatePrice(BigDecimal newPrice) {
+        this.cartPrice = newPrice.multiply(BigDecimal.valueOf(this.quantity));
+    }
+
     // 상품 추가(수량 증가) 메서드
     public void addQuantity(long amount) {
         if (amount <= 0) {

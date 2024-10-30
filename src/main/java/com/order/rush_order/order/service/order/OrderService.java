@@ -45,6 +45,15 @@ public class OrderService {
         for (Cart cart : cartItems) {
 
             Product orderedProduct = cart.getProduct();
+
+            // 최신 가격과 장바구니의 가격 비교
+            BigDecimal latestPrice = orderedProduct.getPrice();
+            if (!latestPrice.equals(cart.getCartPrice())) {
+                cart.updatePrice(latestPrice);
+                throw new IllegalStateException("상품 가격이 변경되었습니다. 장바구니를 새로고침 해주세요.");
+            }
+
+
             BigDecimal productCartPrice = cart.getCartPrice();
             long productQuantity = cart.getQuantity();
 
@@ -64,6 +73,7 @@ public class OrderService {
         orderRepository.save(order);
 
         // 장바구니 비우기
+        //
         cartRepository.deleteAll(cartItems);
 
         return order;
